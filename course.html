@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ζωντανός Κόσμος</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--accent:#0D9488;--surface:#fff;--bg:#F0FDFA;--border:#CCFBF1;--text:#0F172A;--text-muted:#64748B;--font:'Inter',sans-serif;--radius:10px;--shadow-sm:0 2px 8px rgba(0,0,0,.07);--shadow-lg:0 8px 24px rgba(0,0,0,.1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--text);background:var(--bg);min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;gap:.75rem;height:56px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand .logo{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff}
+.brand-name{font-weight:700;font-size:.95rem}
+.brand-sub{font-size:.72rem;color:var(--text-muted)}
+.nav-spacer{flex:1}
+.nav-links-row{display:flex;gap:.25rem}
+.nav-btn{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:.8rem;font-weight:500;font-family:var(--font);border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--text-muted);text-decoration:none;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D9488 0%,#0F766E 100%);color:#fff;padding:3rem 2rem 2.5rem}
+.hero-inner{max-width:860px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem}
+.hero h1{font-size:2rem;font-weight:800;line-height:1.2;margin-bottom:.75rem}
+.hero-sub{font-size:1rem;opacity:.88;line-height:1.6;max-width:580px;margin-bottom:1.75rem}
+.hero-meta{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.82rem;opacity:.85;margin-bottom:1.75rem}
+.hero-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn-hero{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:8px;font-size:.85rem;font-weight:600;font-family:var(--font);border:none;cursor:pointer;text-decoration:none;transition:opacity .15s;white-space:nowrap}
+.btn-hero:hover{opacity:.88;text-decoration:none}
+.btn-hero-primary{background:#fff;color:var(--accent)}
+.btn-hero-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+.page{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem}
+.sl{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--text-muted);margin-bottom:1rem}
+.module-grid{display:flex;flex-direction:column;gap:1.25rem}
+.module-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;border-left:5px solid var(--accent)}
+.mod-header{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.5rem}
+.mod-badge{flex-shrink:0;width:40px;height:40px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;font-weight:700}
+.mod-meta{flex:1}
+.mod-month{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted)}
+.mod-title{font-weight:700;font-size:1.05rem;margin-top:2px}
+.mod-dq{font-size:.82rem;color:var(--text-muted);margin-top:3px;font-style:italic}
+.mod-body{border-top:1px solid var(--border);padding:1.25rem 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.mod-body{grid-template-columns:1fr}}
+.mod-sl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.35rem}
+.mod-txt{font-size:.83rem;color:var(--text);line-height:1.55}
+.mod-med{grid-column:1/-1;background:#F0FDFA;border-left:3px solid var(--accent);border-radius:7px;padding:.85rem 1rem}
+.mod-med-lbl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin-bottom:.3rem}
+.mod-med-txt{font-size:.82rem;color:var(--text);line-height:1.6}
+.mod-footer{border-top:1px solid var(--border);padding:.85rem 1.5rem;display:flex;gap:.65rem;flex-wrap:wrap}
+.btn-sm{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:7px;font-size:.78rem;font-weight:600;font-family:var(--font);border:1.5px solid var(--border);cursor:pointer;color:var(--text-muted);text-decoration:none;transition:all .15s;background:transparent;white-space:nowrap}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.btn-sm-p{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-sm-p:hover{opacity:.88;color:#fff}
+.spinner{text-align:center;padding:4rem;color:var(--text-muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="brand"><div class="logo">Α</div><div><div class="brand-name">Αλεξάνδρεια</div><div class="brand-sub">Εκπαιδευτική Πύλη</div></div></a>
+  <div class="nav-spacer"></div>
+  <div class="nav-links-row">
+    <a class="nav-btn" href="textbook.html?course=a1b2c3d4-0002-0002-0002-000000000002">📖 Εγχειρίδιο</a>
+    <a class="nav-btn" href="discussion.html">💬 Συζητήσεις</a>
+    <a class="nav-btn" href="progress.html">📊 Πρόοδος</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🌱 Ενεργό Μάθημα</div>
+    <h1 id="course-title">Φόρτωση…</h1>
+    <p class="hero-sub" id="course-desc"></p>
+    <div class="hero-meta"><span id="hero-dur"></span><span id="hero-aud"></span></div>
+    <div class="hero-actions">
+      <a class="btn-hero btn-hero-primary" href="textbook.html?course=a1b2c3d4-0002-0002-0002-000000000002">📖 Ψηφιακό Εγχειρίδιο</a>
+      <a class="btn-hero btn-hero-outline" href="discussion.html">💬 Συζητήσεις</a>
+      <a class="btn-hero btn-hero-outline" href="commons.html?course=a1b2c3d4-0002-0002-0002-000000000002">♻️ Κοινό Τάξης</a>
+    </div>
+  </div>
+</div>
+<div class="page">
+  <div class="sl">Ενότητες Μαθήματος</div>
+  <div class="module-grid" id="module-grid"><div class="spinner">Φόρτωση ενοτήτων…</div></div>
+</div>
+<script type="module">
+const SB='https://hhyhulqngdkwsxhymmcd.supabase.co',KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoeWh1bHFuZ2Rrd3N4aHltbWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMzEyMDEsImV4cCI6MjA5MjcwNzIwMX0.dmSy7Q8Je5lEY4XCFzwvfPnkBYLebPE0yZMhy6Y8czI',H={'apikey':KEY,'Authorization':'Bearer '+KEY},CID='a1b2c3d4-0002-0002-0002-000000000002'
+const TID=['c2000001-0002-0002-0002-000000000001','c2000001-0002-0002-0002-000000000002','c2000001-0002-0002-0002-000000000003','c2000001-0002-0002-0002-000000000004','c2000001-0002-0002-0002-000000000005','c2000001-0002-0002-0002-000000000006']
+async function g(p){const r=await fetch(SB+'/rest/v1/'+p,{headers:H});return r.json()}
+async function init(){
+  const[cv,cm]=await Promise.all([g('courses?id=eq.'+CID+'&select=*'),g('course_modules?course_id=eq.'+CID+'&select=*,modules(*)&order=order_index.asc')])
+  const c=cv[0];if(!c)return
+  document.title=c.title
+  document.getElementById('course-title').textContent=c.title
+  document.getElementById('course-desc').textContent=c.description||''
+  document.getElementById('hero-dur').innerHTML='📅 '+(c.duration_months||6)+' μήνες'
+  document.getElementById('hero-aud').innerHTML='🏫 '+(c.audience||'')
+  const grid=document.getElementById('module-grid')
+  grid.innerHTML=cm.map((row,i)=>{
+    const m=row.modules;if(!m)return''
+    const tid=TID[i]||''
+    return `<div class="module-card" id="module-${i+1}"><div class="mod-header"><div class="mod-badge">${i+1}</div><div class="mod-meta"><div class="mod-month">Μήνας ${i+1}</div><div class="mod-title">${m.title}</div><div class="mod-dq">${m.driving_question||''}</div></div></div><div class="mod-body"><div><div class="mod-sl">Επιστημονική Έννοια</div><div class="mod-txt">${m.science_concept||''}</div></div><div><div class="mod-sl">Περιγραφή</div><div class="mod-txt">${m.description||''}</div></div>${m.diaspora_connection?'<div class="mod-med"><div class="mod-med-lbl">🇯🇵 Μεσογειακή Σύνδεση</div><div class="mod-med-txt">'+m.diaspora_connection+'</div></div>':''}</div><div class="mod-footer">${tid?'<a class="btn-sm btn-sm-p" href="discussion-thread.html?id='+tid+'">💬 Συζήτηση Ενότητας</a>':''}<a class="btn-sm" href="textbook.html?course=${CID}#module-${i+1}">📖 Διαβάστε στο Εγχειρίδιο</a></div></div>`
+  }).join('')
+}
+init()
+</script>
+</body>
+</html>

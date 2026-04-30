@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Αλεξάνδρεια — Εκπαιδευτική Πύλη</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--accent:#0D9488;--surface:#fff;--bg:#F0FDFA;--border:#CCFBF1;--text:#0F172A;--text-muted:#64748B;--font:'Inter',sans-serif;--radius:10px;--shadow-lg:0 8px 24px rgba(0,0,0,.12);--shadow-sm:0 2px 6px rgba(0,0,0,.07)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--text);background:var(--bg);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+a{color:var(--accent);text-decoration:none}
+.wrap{width:100%;max-width:480px}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:2.5rem;justify-content:center}
+.logo{width:48px;height:48px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;color:#fff}
+.brand-name{font-weight:700;font-size:1.15rem}
+.brand-sub{font-size:.8rem;color:var(--text-muted)}
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:2.25rem;margin-bottom:1rem}
+.card h2{font-size:1.25rem;font-weight:700;margin-bottom:.4rem}
+.card p{font-size:.875rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.5rem}
+.sl{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:.5rem;margin-top:1.25rem}
+.sl:first-of-type{margin-top:0}
+.nav-links{display:flex;flex-direction:column;gap:.65rem}
+.nl{display:flex;align-items:center;gap:.85rem;padding:.9rem 1.1rem;border:1.5px solid var(--border);border-radius:9px;transition:border-color .18s,box-shadow .18s;text-decoration:none;color:inherit}
+.nl:hover{border-color:var(--accent);box-shadow:var(--shadow-sm)}
+.nl.featured{border-color:#99F6E4;background:#F0FDFA}
+.nl.featured:hover{border-color:var(--accent)}
+.nl-icon{font-size:1.3rem;width:32px;text-align:center;flex-shrink:0}
+.nl-label{font-weight:600;font-size:.9rem}
+.nl-sub{font-size:.78rem;color:var(--text-muted);margin-top:1px}
+.nl-arrow{margin-left:auto;color:var(--text-muted);font-size:.85rem}
+.footer{font-size:.78rem;color:var(--text-muted);text-align:center;margin-top:.5rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="logo">Α</div>
+    <div><div class="brand-name">Αλεξάνδρεια</div><div class="brand-sub">Εκπαιδευτική Πύλη</div></div>
+  </div>
+  <div class="card">
+    <h2>Καλώς ήρθατε</h2>
+    <p>Η Αλεξάνδρεια είναι μια εκπαιδευτική πύλη με πρόσκληση. Επιλέξτε μια κατηγορία για να συνεχίσετε.</p>
+    <div class="sl">Τρέχον Μάθημα</div>
+    <div class="nav-links">
+      <a class="nl featured" href="course.html?course=a1b2c3d4-0002-0002-0002-000000000002"><span class="nl-icon">🌱</span><div><div class="nl-label">Ζωντανός Κόσμος</div><div class="nl-sub">Χώμα, Σπόροι &amp; Φροντίδα &middot; 6 Μήνες</div></div><span class="nl-arrow">›</span></a>
+      <a class="nl" href="textbook.html?course=a1b2c3d4-0002-0002-0002-000000000002"><span class="nl-icon">📖</span><div><div class="nl-label">Ψηφιακό Εγχειρίδιο</div><div class="nl-sub">Άλα 6 ενότητες &middot; Λεξιλόγιο, αναγνώσεις &amp; συνδέσεις</div></div><span class="nl-arrow">›</span></a>
+      <a class="nl" href="progress.html"><span class="nl-icon">📊</span><div><div class="nl-label">Η Πορεία Μου</div><div class="nl-sub">Παρακολούθησε την πρόοδό σου &amp; βρες συμμαθητές</div></div><span class="nl-arrow">›</span></a>
+    </div>
+    <div class="sl">Κοινότητα</div>
+    <div class="nav-links">
+      <a class="nl" href="discussion.html"><span class="nl-icon">💬</span><div><div class="nl-label">Συζητήσεις</div><div class="nl-sub">Κάνε ερωτήσεις, μοιράσου ιδέες, απάντησε σε νήματα</div></div><span class="nl-arrow">›</span></a>
+      <a class="nl" href="commons.html?course=a1b2c3d4-0002-0002-0002-000000000002"><span class="nl-icon">♻️</span><div><div class="nl-label">Κοινό Τάξης</div><div class="nl-sub">Πρόγραμμα ανακύκλωσης &amp; κυκλικής οικονομίας</div></div><span class="nl-arrow">›</span></a>
+    </div>
+    <div class="sl">Πύλη</div>
+    <div class="nav-links">
+      <a class="nl" href="request-access.html"><span class="nl-icon">🔑</span><div><div class="nl-label">Αίτηση Πρόσβασης</div><div class="nl-sub">Εγγραφή με πρόσκληση ή υποβολή αίτησης</div></div><span class="nl-arrow">›</span></a>
+    </div>
+  </div>
+  <p class="footer">Αλεξάνδρεια &mdash; με πρόσκληση &middot; <a href="request-access.html">Αίτηση πρόσβασης</a></p>
+</div>
+</body>
+</html>
