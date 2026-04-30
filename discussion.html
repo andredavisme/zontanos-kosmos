@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Συζητήσεις — Ζωντανός Κόσμος</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--accent:#0D9488;--surface:#fff;--bg:#F0FDFA;--border:#CCFBF1;--border-mid:#99F6E4;--text:#0F172A;--text-muted:#64748B;--font:'Inter',sans-serif;--radius:10px;--shadow-sm:0 2px 8px rgba(0,0,0,.07)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--text);background:var(--bg);min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;gap:.75rem;height:56px;position:sticky;top:0;z-index:50}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand .logo{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff}
+.brand-name{font-weight:700;font-size:.95rem}
+.brand-sub{font-size:.72rem;color:var(--text-muted)}
+.nav-sep{color:var(--border-mid)}
+.nav-title{font-weight:600;font-size:.9rem;color:var(--text-muted)}
+.nav-spacer{flex:1}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:.8rem;font-weight:500;font-family:var(--font);border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--text-muted);text-decoration:none;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.page{max-width:760px;margin:0 auto;padding:2.5rem 1.5rem}
+.page-header{margin-bottom:2rem}
+.page-header h1{font-size:1.5rem;font-weight:800;margin-bottom:.4rem}
+.page-header p{font-size:.9rem;color:var(--text-muted);line-height:1.6}
+.section-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:.75rem;margin-top:2rem}
+.section-label:first-of-type{margin-top:0}
+.thread-list{display:flex;flex-direction:column;gap:.65rem}
+.thread-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.25rem;display:flex;align-items:center;gap:1rem;transition:border-color .15s,box-shadow .15s;text-decoration:none;color:inherit}
+.thread-card:hover{border-color:var(--accent);box-shadow:var(--shadow-sm);text-decoration:none}
+.thread-card.pinned{border-color:#99F6E4;background:#F0FDFA}
+.thread-icon{font-size:1.4rem;flex-shrink:0}
+.thread-body{flex:1;min-width:0}
+.thread-title{font-weight:600;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.2rem}
+.thread-meta{font-size:.75rem;color:var(--text-muted);display:flex;align-items:center;gap:.75rem}
+.thread-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:.65rem;font-weight:700;background:var(--bg);border:1px solid var(--border);color:var(--text-muted)}
+.thread-badge.pinned-badge{background:#CCFBF1;border-color:#99F6E4;color:var(--accent)}
+.thread-badge.open{background:#ECFDF5;border-color:#6EE7B7;color:#059669}
+.thread-arrow{color:var(--text-muted);font-size:.85rem;flex-shrink:0}
+.spinner{text-align:center;padding:4rem;color:var(--text-muted);font-size:.9rem}
+.empty{text-align:center;padding:3rem;color:var(--text-muted);font-size:.88rem}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="brand"><div class="logo">Α</div><div><div class="brand-name">Αλεξάνδρεια</div><div class="brand-sub">Εκπαιδευτική Πύλη</div></div></a>
+  <span class="nav-sep">›</span>
+  <span class="nav-title">💬 Συζητήσεις</span>
+  <div class="nav-spacer"></div>
+  <a class="nav-btn" href="course.html?course=a1b2c3d4-0002-0002-0002-000000000002">← Μάθημα</a>
+</nav>
+<div class="page">
+  <div class="page-header">
+    <h1>💬 Συζητήσεις</h1>
+    <p>Βάλε ερωτήσεις, μοιράσου αυτό που ανακάλυψες και απάντησε σε συμμαθητές.</p>
+  </div>
+  <div id="board"><div class="spinner">Φόρτωση…</div></div>
+</div>
+<script type="module">
+const SB='https://hhyhulqngdkwsxhymmcd.supabase.co',KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoeWh1bHFuZ2Rrd3N4aHltbWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMzEyMDEsImV4cCI6MjA5MjcwNzIwMX0.dmSy7Q8Je5lEY4XCFzwvfPnkBYLebPE0yZMhy6Y8czI',H={'apikey':KEY,'Authorization':'Bearer '+KEY}
+const CID='a1b2c3d4-0002-0002-0002-000000000002'
+const MODULE_THREAD_IDS=['c2000001-0002-0002-0002-000000000001','c2000001-0002-0002-0002-000000000002','c2000001-0002-0002-0002-000000000003','c2000001-0002-0002-0002-000000000004','c2000001-0002-0002-0002-000000000005','c2000001-0002-0002-0002-000000000006']
+const GENERAL_IDS=['c2000001-0002-0002-0002-000000000007','c2000001-0002-0002-0002-000000000008']
+
+async function g(p){const r=await fetch(SB+'/rest/v1/'+p,{headers:H});return r.json()}
+
+function statusBadge(s){
+  if(s==='pinned')return '<span class="thread-badge pinned-badge">📌 Επικολλημένο</span>'
+  if(s==='open')return '<span class="thread-badge open">● Ανοιχτό</span>'
+  return '<span class="thread-badge">Κλειστό</span>'
+}
+
+function iconFor(t){
+  if(GENERAL_IDS.includes(t.id))return t.id===GENERAL_IDS[0]?'👋':'♻️'
+  return '📖'
+}
+
+function threadCard(t){
+  const isPinned=GENERAL_IDS.includes(t.id)
+  return `<a class="thread-card${isPinned?' pinned':''}" href="discussion-thread.html?id=${t.id}">
+    <div class="thread-icon">${iconFor(t)}</div>
+    <div class="thread-body">
+      <div class="thread-title">${t.title}</div>
+      <div class="thread-meta">
+        ${statusBadge(t.status)}
+        <span>Από: ${t.author_name}</span>
+        <span>${new Date(t.created_at).toLocaleDateString('el-GR')}</span>
+      </div>
+    </div>
+    <span class="thread-arrow">›</span>
+  </a>`
+}
+
+async function init(){
+  const threads=await g('discussion_threads?course_id=eq.'+CID+'&select=*&order=created_at.asc')
+  const general=threads.filter(t=>GENERAL_IDS.includes(t.id))
+  const byModule=MODULE_THREAD_IDS.map(id=>threads.find(t=>t.id===id)).filter(Boolean)
+  const board=document.getElementById('board')
+  let html=''
+  if(general.length){
+    html+='<div class="section-label">Γενικές Συζητήσεις</div><div class="thread-list">'+general.map(threadCard).join('')+'</div>'
+  }
+  if(byModule.length){
+    html+='<div class="section-label">Ανά Ενότητα</div><div class="thread-list">'+byModule.map(threadCard).join('')+'</div>'
+  }
+  board.innerHTML=html||'<div class="empty">Δεν βρέθηκαν συζητήσεις.</div>'
+}
+init()
+</script>
+</body>
+</html>

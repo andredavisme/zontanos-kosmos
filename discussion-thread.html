@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Συζήτηση</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--accent:#0D9488;--surface:#fff;--bg:#F0FDFA;--border:#CCFBF1;--text:#0F172A;--text-muted:#64748B;--font:'Inter',sans-serif;--radius:10px;--shadow-sm:0 2px 8px rgba(0,0,0,.07)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--text);background:var(--bg);min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;gap:.75rem;height:56px;position:sticky;top:0;z-index:50}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand .logo{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff}
+.brand-name{font-weight:700;font-size:.95rem}
+.brand-sub{font-size:.72rem;color:var(--text-muted)}
+.nav-sep{color:#99F6E4}
+.nav-title{font-weight:600;font-size:.9rem;color:var(--text-muted);max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-spacer{flex:1}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:.8rem;font-weight:500;font-family:var(--font);border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--text-muted);text-decoration:none;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.page{max-width:700px;margin:0 auto;padding:2.5rem 1.5rem}
+
+/* Thread header */
+.thread-header{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:2rem}
+.thread-status-row{display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:.65rem;font-weight:700}
+.badge-pinned{background:#CCFBF1;border:1px solid #99F6E4;color:var(--accent)}
+.badge-open{background:#ECFDF5;border:1px solid #6EE7B7;color:#059669}
+.thread-title{font-size:1.3rem;font-weight:800;margin-bottom:.6rem;line-height:1.3}
+.thread-body-text{font-size:.9rem;color:var(--text-muted);line-height:1.7;margin-bottom:.75rem}
+.thread-meta{font-size:.75rem;color:var(--text-muted)}
+
+/* Posts */
+.posts-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:.75rem}
+.posts-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.post-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.25rem}
+.post-card.teacher-post{border-left:3px solid var(--accent)}
+.post-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.post-avatar{width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#fff;font-weight:700;flex-shrink:0}
+.post-avatar.student{background:#0F766E}
+.post-author{font-weight:600;font-size:.85rem}
+.post-role{font-size:.68rem;color:var(--text-muted)}
+.post-date{margin-left:auto;font-size:.72rem;color:var(--text-muted)}
+.post-content{font-size:.875rem;line-height:1.7;color:var(--text)}
+.no-posts{text-align:center;padding:2rem;color:var(--text-muted);font-size:.88rem;background:var(--surface);border:1.5px dashed var(--border);border-radius:var(--radius);margin-bottom:2rem}
+
+/* Reply form */
+.reply-section{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:1.5rem}
+.reply-section h3{font-size:.95rem;font-weight:700;margin-bottom:1rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.75rem;font-weight:600;color:var(--text-muted);margin-bottom:.35rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:.65rem .85rem;border:1.5px solid var(--border);border-radius:8px;font-size:.875rem;font-family:var(--font);color:var(--text);background:var(--bg);transition:border-color .15s;outline:none;resize:vertical}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+.btn-submit{width:100%;padding:.75rem;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:.875rem;font-weight:700;font-family:var(--font);cursor:pointer;transition:opacity .15s}
+.btn-submit:hover{opacity:.88}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+.success-msg{background:#ECFDF5;border:1.5px solid #6EE7B7;border-radius:8px;padding:1rem;font-size:.85rem;color:#059669;margin-top:1rem;display:none}
+.spinner{text-align:center;padding:4rem;color:var(--text-muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="brand"><div class="logo">Α</div><div><div class="brand-name">Αλεξάνδρεια</div><div class="brand-sub">Εκπαιδευτική Πύλη</div></div></a>
+  <span class="nav-sep">›</span>
+  <span class="nav-title" id="nav-title">Συζήτηση</span>
+  <div class="nav-spacer"></div>
+  <a class="nav-btn" href="discussion.html">← Συζητήσεις</a>
+</nav>
+<div class="page">
+  <div id="loading"><div class="spinner">Φόρτωση…</div></div>
+  <div id="thread-content" style="display:none">
+    <div class="thread-header">
+      <div class="thread-status-row" id="status-row"></div>
+      <div class="thread-title" id="thread-title"></div>
+      <div class="thread-body-text" id="thread-body"></div>
+      <div class="thread-meta" id="thread-meta"></div>
+    </div>
+    <div class="posts-label">Απαντήσεις</div>
+    <div class="posts-list" id="posts-list"></div>
+    <div class="reply-section">
+      <h3>Απάντησε σε αυτή τη συζήτηση</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Όνομα</label><input type="text" id="reply-name" placeholder="Το όνομά σου"/></div>
+        <div class="form-group"><label>Ρόλος</label><select id="reply-role"><option value="student">Μαθητής/ρια</option><option value="teacher">Δάσκαλος/α</option></select></div>
+      </div>
+      <div class="form-group"><label>Μήνυμα</label><textarea id="reply-body" rows="4" placeholder="Γράψε εδώ…"></textarea></div>
+      <button class="btn-submit" id="reply-btn" onclick="submitReply()">Στείλε Απάντηση</button>
+      <div class="success-msg" id="success-msg">✅ Η απάντησή σου εστάλη! Θα εμφανιστεί μετά από έλεγχο.</div>
+    </div>
+  </div>
+</div>
+<script type="module">
+const SB='https://hhyhulqngdkwsxhymmcd.supabase.co',KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoeWh1bHFuZ2Rrd3N4aHltbWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMzEyMDEsImV4cCI6MjA5MjcwNzIwMX0.dmSy7Q8Je5lEY4XCFzwvfPnkBYLebPE0yZMhy6Y8czI',H={'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'}
+const params=new URLSearchParams(location.search)
+const TID=params.get('id')
+window._tid=TID
+
+async function g(p){const r=await fetch(SB+'/rest/v1/'+p,{headers:H});return r.json()}
+
+function initials(n){return n?n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase():'?'}
+function relDate(d){
+  const diff=(Date.now()-new Date(d))/(1000*60)
+  if(diff<1)return 'σε λίγο'
+  if(diff<60)return Math.round(diff)+' λεπτά'
+  if(diff<1440)return Math.round(diff/60)+' ώρες'
+  return new Date(d).toLocaleDateString('el-GR')
+}
+
+async function init(){
+  if(!TID){document.getElementById('loading').innerHTML='<div class="spinner">Δεν βρέθηκε συζήτηση.</div>';return}
+  const[threads,posts]=await Promise.all([
+    g('discussion_threads?id=eq.'+TID+'&select=*'),
+    g('discussion_posts?thread_id=eq.'+TID+'&select=*&order=created_at.asc')
+  ])
+  const t=threads[0]
+  if(!t){document.getElementById('loading').innerHTML='<div class="spinner">Δεν βρέθηκε συζήτηση.</div>';return}
+
+  document.title=t.title
+  document.getElementById('nav-title').textContent=t.title
+
+  const statusRow=document.getElementById('status-row')
+  if(t.status==='pinned')statusRow.innerHTML='<span class="badge badge-pinned">📌 Επικολλημένο</span>'
+  else statusRow.innerHTML='<span class="badge badge-open">● Ανοιχτό</span>'
+
+  document.getElementById('thread-title').textContent=t.title
+  document.getElementById('thread-body').textContent=t.body||''
+  document.getElementById('thread-meta').textContent='Από '+t.author_name+' · '+new Date(t.created_at).toLocaleDateString('el-GR')
+
+  const postsList=document.getElementById('posts-list')
+  if(posts.length){
+    postsList.innerHTML=posts.map(p=>`
+      <div class="post-card${p.author_type==='teacher'?' teacher-post':''}">
+        <div class="post-header">
+          <div class="post-avatar${p.author_type==='student'?' student':''}">${initials(p.author_name)}</div>
+          <div><div class="post-author">${p.author_name}</div><div class="post-role">${p.author_type==='teacher'?'Δάσκαλος/α':'Μαθητής/ρια'}</div></div>
+          <div class="post-date">${relDate(p.created_at)}</div>
+        </div>
+        <div class="post-content">${p.content}</div>
+      </div>`).join('')
+  } else {
+    postsList.innerHTML='<div class="no-posts">💭 Κανένας δεν έχει απαντήσει ακόμα. Γίνε ο πρώτος!</div>'
+  }
+
+  document.getElementById('loading').style.display='none'
+  document.getElementById('thread-content').style.display='block'
+}
+
+window.submitReply=async function(){
+  const name=document.getElementById('reply-name').value.trim()
+  const body=document.getElementById('reply-body').value.trim()
+  const role=document.getElementById('reply-role').value
+  if(!name||!body){alert('Συμπλήρωσε όνομα και μήνυμα.');return}
+  const btn=document.getElementById('reply-btn')
+  btn.disabled=true;btn.textContent='Αποστολή…'
+  await fetch(SB+'/rest/v1/discussion_posts',{method:'POST',headers:H,body:JSON.stringify({thread_id:window._tid,author_name:name,author_type:role,content:body,status:'pending',source:'zontanos-kosmos'})})
+  document.getElementById('reply-name').value=''
+  document.getElementById('reply-body').value=''
+  btn.disabled=false;btn.textContent='Στείλε Απάντηση'
+  const msg=document.getElementById('success-msg')
+  msg.style.display='block'
+  setTimeout(()=>msg.style.display='none',4000)
+}
+
+init()
+</script>
+</body>
+</html>
