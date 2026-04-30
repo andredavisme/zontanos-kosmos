@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Η Πορεία Μου — Ζωντανός Κόσμος</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--accent:#0D9488;--surface:#fff;--bg:#F0FDFA;--border:#CCFBF1;--text:#0F172A;--text-muted:#64748B;--font:'Inter',sans-serif;--radius:10px;--shadow-sm:0 2px 8px rgba(0,0,0,.07)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--text);background:var(--bg);min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;gap:.75rem;height:56px;position:sticky;top:0;z-index:50}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand .logo{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff}
+.brand-name{font-weight:700;font-size:.95rem}
+.brand-sub{font-size:.72rem;color:var(--text-muted)}
+.nav-sep{color:#99F6E4}
+.nav-title{font-weight:600;font-size:.9rem;color:var(--text-muted)}
+.nav-spacer{flex:1}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:.8rem;font-weight:500;font-family:var(--font);border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--text-muted);text-decoration:none;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.page{max-width:700px;margin:0 auto;padding:2.5rem 1.5rem}
+.page-header{margin-bottom:2rem}
+.page-header h1{font-size:1.5rem;font-weight:800;margin-bottom:.35rem}
+.page-header p{font-size:.88rem;color:var(--text-muted);line-height:1.6}
+
+/* Progress ring summary */
+.progress-summary{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem}
+.ring-wrap{flex-shrink:0}
+.ring-wrap svg{display:block}
+.ring-track{fill:none;stroke:var(--border);stroke-width:8}
+.ring-fill{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.ring-label{font-size:.72rem;color:var(--text-muted);text-anchor:middle;dominant-baseline:middle}
+.ring-pct{font-size:1.1rem;font-weight:800;fill:var(--text);text-anchor:middle;dominant-baseline:middle}
+.progress-meta{flex:1}
+.progress-meta h2{font-size:1rem;font-weight:700;margin-bottom:.35rem}
+.progress-meta p{font-size:.83rem;color:var(--text-muted);line-height:1.6}
+.progress-meta .pct-big{font-size:1.8rem;font-weight:800;color:var(--accent);display:block;line-height:1;margin-bottom:.25rem}
+
+/* Module rows */
+.module-rows{display:flex;flex-direction:column;gap:.65rem;margin-bottom:2rem}
+.mod-row{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;transition:border-color .15s}
+.mod-row:hover{border-color:var(--accent)}
+.mod-row-num{flex-shrink:0;width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;color:#fff;background:var(--accent)}
+.mod-row-num.done{background:#059669}
+.mod-row-num.locked{background:var(--border);color:var(--text-muted)}
+.mod-row-body{flex:1;min-width:0}
+.mod-row-title{font-weight:600;font-size:.9rem;margin-bottom:.2rem}
+.mod-row-meta{font-size:.75rem;color:var(--text-muted)}
+.mod-row-bar{height:5px;background:var(--border);border-radius:3px;margin-top:.5rem}
+.mod-row-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .5s ease}
+.mod-row-actions{display:flex;gap:.4rem;flex-shrink:0}
+.btn-xs{display:inline-flex;align-items:center;gap:3px;padding:4px 9px;border-radius:6px;font-size:.72rem;font-weight:600;font-family:var(--font);border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--text-muted);text-decoration:none;transition:all .15s;white-space:nowrap}
+.btn-xs:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+/* Checklist */
+.checklist{margin-top:2rem}
+.cl-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:.75rem}
+.cl-items{display:flex;flex-direction:column;gap:.5rem}
+.cl-item{display:flex;align-items:flex-start;gap:.75rem;background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:.85rem 1rem;cursor:pointer;transition:border-color .12s}
+.cl-item:hover{border-color:var(--accent)}
+.cl-item.checked{border-color:#6EE7B7;background:#ECFDF5}
+.cl-check{width:20px;height:20px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px}
+.cl-item.checked .cl-check{background:#059669;border-color:#059669;color:#fff}
+.cl-item-text{font-size:.85rem;color:var(--text);line-height:1.5}
+.cl-item.checked .cl-item-text{color:var(--text-muted);text-decoration:line-through}
+
+.spinner{text-align:center;padding:3rem;color:var(--text-muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="brand"><div class="logo">Α</div><div><div class="brand-name">Αλεξάνδρεια</div><div class="brand-sub">Εκπαιδευτική Πύλη</div></div></a>
+  <span class="nav-sep">›</span>
+  <span class="nav-title">📊 Η Πορεία Μου</span>
+  <div class="nav-spacer"></div>
+  <a class="nav-btn" href="course.html?course=a1b2c3d4-0002-0002-0002-000000000002">← Μάθημα</a>
+</nav>
+<div class="page">
+  <div class="page-header">
+    <h1>📊 Η Πορεία Μου</h1>
+    <p>Παρακολούθησε την πρόοδό σου στο Μάθημα Ζωντανός Κόσμος — κάθε ενότητα είναι μια νέα ανακάλυψη.</p>
+  </div>
+
+  <div class="progress-summary">
+    <div class="ring-wrap">
+      <svg width="80" height="80" viewBox="0 0 80 80">
+        <circle class="ring-track" cx="40" cy="40" r="32"/>
+        <circle class="ring-fill" id="ring-fill" cx="40" cy="40" r="32" stroke-dasharray="201" stroke-dashoffset="201" transform="rotate(-90 40 40)"/>
+        <text class="ring-pct" id="ring-pct" x="40" y="38">0%</text>
+        <text class="ring-label" x="40" y="52">Πρόοδος</text>
+      </svg>
+    </div>
+    <div class="progress-meta">
+      <span class="pct-big" id="pct-big">0%</span>
+      <h2 id="progress-headline">Έτοιμος να ξεκινήσεις!</h2>
+      <p id="progress-sub">Ολοκλήρωσε τις ενότητες και σημείωσε τι έχεις μάθει.</p>
+    </div>
+  </div>
+
+  <div id="module-rows"><div class="spinner">Φόρτωση…</div></div>
+
+  <div class="checklist">
+    <div class="cl-label">Λίστα Ενεργειών</div>
+    <div class="cl-items" id="cl-items"></div>
+  </div>
+</div>
+
+<script type="module">
+const SB='https://hhyhulqngdkwsxhymmcd.supabase.co',KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoeWh1bHFuZ2Rrd3N4aHltbWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMzEyMDEsImV4cCI6MjA5MjcwNzIwMX0.dmSy7Q8Je5lEY4XCFzwvfPnkBYLebPE0yZMhy6Y8czI',H={'apikey':KEY,'Authorization':'Bearer '+KEY}
+const CID='a1b2c3d4-0002-0002-0002-000000000002'
+const MIDS=['b2000001-0002-0002-0002-000000000001','b2000001-0002-0002-0002-000000000002','b2000001-0002-0002-0002-000000000003','b2000001-0002-0002-0002-000000000004','b2000001-0002-0002-0002-000000000005','b2000001-0002-0002-0002-000000000006']
+const THREAD_IDS=['c2000001-0002-0002-0002-000000000001','c2000001-0002-0002-0002-000000000002','c2000001-0002-0002-0002-000000000003','c2000001-0002-0002-0002-000000000004','c2000001-0002-0002-0002-000000000005','c2000001-0002-0002-0002-000000000006']
+const CHECKLIST_KEY='zk-checklist'
+const DEFAULT_CHECKS=['Διάβασε την ενότητα στο εγχειρίδιο','Ανταποκρίθηκες στην συζήτηση ενότητας','Εργάστηκες την δραστηριότητα','Έγραψες στο ημερολόγιο','Συνεισέφερες στο Κοινό Τάξης','Μοιράστηκες αυτό που ανακάλυψες με συμμαθητές']
+
+async function g(p){const r=await fetch(SB+'/rest/v1/'+p,{headers:H});return r.json()}
+
+async function init(){
+  const mods=await g('modules?id=in.('+MIDS.join(',')+')'+'&select=id,title,month_number&order=month_number.asc')
+
+  // Load saved progress from localStorage
+  const saved=JSON.parse(localStorage.getItem('zk-progress')||'{}')
+  const completed=Object.values(saved).filter(Boolean).length
+  const total=6
+  const pct=Math.round((completed/total)*100)
+
+  // Update ring
+  const circumference=2*Math.PI*32
+  const offset=circumference-(pct/100)*circumference
+  document.getElementById('ring-fill').style.strokeDashoffset=offset
+  document.getElementById('ring-pct').textContent=pct+'%'
+  document.getElementById('pct-big').textContent=pct+'%'
+  if(pct===100){
+    document.getElementById('progress-headline').textContent='Ολοκλήρωσες όλες τις ενότητες! 🎉'
+    document.getElementById('progress-sub').textContent='Συγχαρητήρια! Ολοκλήρωσες το Μάθημα Ζωντανός Κόσμος.'
+  } else if(pct>0){
+    document.getElementById('progress-headline').textContent=`${completed} από ${total} ενότητες`
+    document.getElementById('progress-sub').textContent='Συνέχισε την προσπάθεια.'
+  }
+
+  // Module rows
+  const rows=document.getElementById('module-rows')
+  rows.innerHTML='<div class="module-rows">'+mods.map((m,i)=>{
+    const isDone=saved['mod_'+m.id]
+    const fill=isDone?100:0
+    return `<div class="mod-row">
+      <div class="mod-row-num${isDone?' done':''}"> ${i+1}</div>
+      <div class="mod-row-body">
+        <div class="mod-row-title">${m.title}</div>
+        <div class="mod-row-meta">Μήνας ${i+1} · ${isDone?'✅ Ολοκληρώθηκε':'Σε εξέλιξη'}</div>
+        <div class="mod-row-bar"><div class="mod-row-bar-fill" style="width:${fill}%"></div></div>
+      </div>
+      <div class="mod-row-actions">
+        <a class="btn-xs" href="textbook.html?course=${CID}#module-${i+1}">📖</a>
+        <a class="btn-xs" href="discussion-thread.html?id=${THREAD_IDS[i]}">💬</a>
+        <button class="btn-xs" onclick="toggleMod('${m.id}',this)">${isDone?'↺':'✓ Ολοκλήρωση'}</button>
+      </div>
+    </div>`
+  }).join('')+'</div>'
+
+  // Checklist
+  const clSaved=JSON.parse(localStorage.getItem(CHECKLIST_KEY)||'{}')
+  const clItems=document.getElementById('cl-items')
+  clItems.innerHTML=DEFAULT_CHECKS.map((txt,i)=>{
+    const isChecked=clSaved['cl_'+i]
+    return `<div class="cl-item${isChecked?' checked':''}" onclick="toggleCl(${i},this)">
+      <div class="cl-check">${isChecked?'✓':''}</div>
+      <div class="cl-item-text">${txt}</div>
+    </div>`
+  }).join('')
+}
+
+window.toggleMod=function(id,btn){
+  const saved=JSON.parse(localStorage.getItem('zk-progress')||'{}')
+  const key='mod_'+id
+  saved[key]=!saved[key]
+  localStorage.setItem('zk-progress',JSON.stringify(saved))
+  location.reload()
+}
+
+window.toggleCl=function(i,el){
+  const saved=JSON.parse(localStorage.getItem(CHECKLIST_KEY)||'{}')
+  const key='cl_'+i
+  saved[key]=!saved[key]
+  localStorage.setItem(CHECKLIST_KEY,JSON.stringify(saved))
+  el.classList.toggle('checked')
+  const check=el.querySelector('.cl-check')
+  check.textContent=saved[key]?'✓':''
+}
+
+init()
+</script>
+</body>
+</html>
