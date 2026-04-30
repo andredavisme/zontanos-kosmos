@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ψηφιακό Εγχειρίδιο — Ζωντανός Κόσμος</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--accent:#0D9488;--accent-light:#14B8A6;--surface:#fff;--bg:#F0FDFA;--border:#CCFBF1;--border-mid:#99F6E4;--text:#0F172A;--text-muted:#64748B;--font:'Inter',sans-serif;--radius:10px;--shadow-sm:0 2px 8px rgba(0,0,0,.07);--shadow-lg:0 8px 24px rgba(0,0,0,.1);--sidebar:260px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--text);background:var(--bg);min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Nav */
+.nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;gap:.75rem;height:56px;position:sticky;top:0;z-index:50}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand .logo{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:#fff}
+.brand-name{font-weight:700;font-size:.95rem}
+.brand-sub{font-size:.72rem;color:var(--text-muted)}
+.nav-sep{color:var(--border-mid)}
+.nav-title{font-weight:600;font-size:.9rem;color:var(--text-muted)}
+.nav-spacer{flex:1}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;font-size:.8rem;font-weight:500;font-family:var(--font);border:1.5px solid var(--border);background:transparent;cursor:pointer;color:var(--text-muted);text-decoration:none;transition:all .15s;white-space:nowrap}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+/* Layout */
+.layout{display:flex;min-height:calc(100vh - 56px)}
+
+/* Sidebar */
+.sidebar{width:var(--sidebar);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);padding:1.5rem 0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
+.sb-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);padding:0 1.25rem;margin-bottom:.5rem;margin-top:1.25rem}
+.sb-label:first-child{margin-top:0}
+.sb-link{display:flex;align-items:center;gap:.65rem;padding:.55rem 1.25rem;font-size:.83rem;color:var(--text-muted);text-decoration:none;transition:background .12s,color .12s;border-left:3px solid transparent}
+.sb-link:hover{background:#F0FDFA;color:var(--text);text-decoration:none}
+.sb-link.active{background:#F0FDFA;color:var(--accent);border-left-color:var(--accent);font-weight:600}
+.sb-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:var(--text-muted)}
+.sb-link.active .sb-num{background:var(--accent);color:#fff}
+@media(max-width:700px){.sidebar{display:none}}
+
+/* Main content */
+.main{flex:1;padding:2.5rem 2rem;max-width:720px}
+
+/* Module sections */
+.module-section{margin-bottom:4rem;scroll-margin-top:72px}
+.mod-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.75rem}
+.mod-num-badge{flex-shrink:0;width:48px;height:48px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;font-weight:800}
+.mod-header-text{flex:1}
+.mod-month-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin-bottom:.25rem}
+.mod-title{font-size:1.5rem;font-weight:800;line-height:1.2;margin-bottom:.4rem}
+.mod-dq{font-size:.95rem;color:var(--text-muted);font-style:italic;line-height:1.5}
+
+/* Divider */
+.section-divider{height:1px;background:var(--border);margin:1.5rem 0}
+
+/* Content blocks */
+.content-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:.6rem}
+.content-text{font-size:.9rem;line-height:1.75;color:var(--text);margin-bottom:1.5rem}
+
+/* Mediterranean callout */
+.med-callout{background:linear-gradient(135deg,#F0FDFA,#CCFBF1);border-left:4px solid var(--accent);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1.5rem}
+.med-callout-header{display:flex;align-items:center;gap:.5rem;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:.6rem}
+.med-callout-text{font-size:.88rem;line-height:1.7;color:var(--text)}
+
+/* Vocab */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-bottom:1.5rem}
+.vocab-card{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:.75rem 1rem}
+.vocab-word{font-weight:700;font-size:.88rem;color:var(--accent);margin-bottom:.25rem}
+.vocab-def{font-size:.78rem;color:var(--text-muted);line-height:1.5}
+
+/* Activities */
+.activity-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem}
+.activity-item{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:1rem 1.1rem;display:flex;gap:.85rem;align-items:flex-start}
+.activity-icon{font-size:1.2rem;flex-shrink:0;margin-top:1px}
+.activity-body{flex:1}
+.activity-type{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text-muted);margin-bottom:.2rem}
+.activity-title{font-weight:600;font-size:.88rem;margin-bottom:.25rem}
+.activity-text{font-size:.8rem;color:var(--text-muted);line-height:1.5}
+
+/* Journal prompts */
+.prompt-list{display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.5rem}
+.prompt-item{background:#FFFBEB;border-left:3px solid #F59E0B;border-radius:7px;padding:.85rem 1rem}
+.prompt-type{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#B45309;margin-bottom:.25rem}
+.prompt-text{font-size:.85rem;color:var(--text);line-height:1.55}
+
+/* Spinner */
+.spinner{text-align:center;padding:4rem;color:var(--text-muted);font-size:.9rem}
+
+/* Back-to-top */
+.back-top{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;color:var(--text-muted);padding:6px 12px;border:1.5px solid var(--border);border-radius:7px;cursor:pointer;background:transparent;font-family:var(--font);transition:all .15s;margin-top:1rem}
+.back-top:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="brand"><div class="logo">Α</div><div><div class="brand-name">Αλεξάνδρεια</div><div class="brand-sub">Εκπαιδευτική Πύλη</div></div></a>
+  <span class="nav-sep">›</span>
+  <span class="nav-title">📖 Ψηφιακό Εγχειρίδιο</span>
+  <div class="nav-spacer"></div>
+  <a class="nav-btn" href="course.html?course=a1b2c3d4-0002-0002-0002-000000000002">← Μάθημα</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-label">Ψηφιακό Εγχειρίδιο</div>
+    <a class="sb-link" href="course.html?course=a1b2c3d4-0002-0002-0002-000000000002">← Πίσω στο Μάθημα</a>
+    <div class="sb-label">Ενότητες</div>
+    <div id="sidebar-links"></div>
+  </aside>
+
+  <main class="main" id="main-content">
+    <div class="spinner" id="loading">Φόρτωση εγχειριδίου…</div>
+    <div id="textbook-content"></div>
+  </main>
+</div>
+
+<script type="module">
+const SB='https://hhyhulqngdkwsxhymmcd.supabase.co'
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhoeWh1bHFuZ2Rrd3N4aHltbWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMzEyMDEsImV4cCI6MjA5MjcwNzIwMX0.dmSy7Q8Je5lEY4XCFzwvfPnkBYLebPE0yZMhy6Y8czI'
+const H={'apikey':KEY,'Authorization':'Bearer '+KEY}
+const CID='a1b2c3d4-0002-0002-0002-000000000002'
+const TID=['c2000001-0002-0002-0002-000000000001','c2000001-0002-0002-0002-000000000002','c2000001-0002-0002-0002-000000000003','c2000001-0002-0002-0002-000000000004','c2000001-0002-0002-0002-000000000005','c2000001-0002-0002-0002-000000000006']
+
+const ACTIVITY_ICONS={experiment:'🧪',math:'📊',reading:'📖',language:'📝',problem_solving:'🧩',culminating_project:'🏆',commons:'♻️'}
+const ACTIVITY_LABELS={experiment:'Πείραμα',math:'Μαθηματικά',reading:'Ανάγνωση',language:'Γλώσσα',problem_solving:'Επίλυση Προβλήματος',culminating_project:'Τελικό Έργο',commons:'Κοινό Τάξης'}
+const PROMPT_LABELS={reflective:'Στοχασμός',creative:'Τβα',observational:'Παρατήρηση',narrative:'Αφήγηση'}
+
+async function g(path){
+  const r=await fetch(SB+'/rest/v1/'+path,{headers:H})
+  return r.json()
+}
+
+async function init(){
+  const[cmRaw,activitiesRaw,promptsRaw]=await Promise.all([
+    g('course_modules?course_id=eq.'+CID+'&select=*,modules(*)&order=order_index.asc'),
+    g('activities?select=*&order=order_index.asc'),
+    g('journal_prompts?select=*&order=order_index.asc')
+  ])
+
+  // Index activities and prompts by module_id
+  const actByMod={}
+  activitiesRaw.forEach(a=>{ if(!actByMod[a.module_id])actByMod[a.module_id]=[]; actByMod[a.module_id].push(a) })
+  const promByMod={}
+  promptsRaw.forEach(p=>{ if(!promByMod[p.module_id])promByMod[p.module_id]=[]; promByMod[p.module_id].push(p) })
+
+  // Sidebar
+  const sbLinks=document.getElementById('sidebar-links')
+  sbLinks.innerHTML=cmRaw.map((cm,i)=>{
+    const m=cm.modules;if(!m)return''
+    return `<a class="sb-link" href="#module-${i+1}"><span class="sb-num">${i+1}</span>${m.title}</a>`
+  }).join('')
+
+  // Main content
+  const content=document.getElementById('textbook-content')
+  content.innerHTML=cmRaw.map((cm,i)=>{
+    const m=cm.modules;if(!m)return''
+    const acts=actByMod[m.id]||[]
+    const proms=promByMod[m.id]||[]
+    const threadId=TID[i]||''
+
+    // Vocab — derive from science_concept keywords (simple split approach)
+    const vocabWords=buildVocab(m)
+
+    return `
+    <section class="module-section" id="module-${i+1}">
+      <div class="mod-header">
+        <div class="mod-num-badge">${i+1}</div>
+        <div class="mod-header-text">
+          <div class="mod-month-tag">Μήνας ${i+1}</div>
+          <div class="mod-title">${m.title}</div>
+          <div class="mod-dq">${m.driving_question||''}</div>
+        </div>
+      </div>
+
+      <div class="content-label">Περιγραφή Ενότητας</div>
+      <div class="content-text">${m.description||''}</div>
+
+      <div class="content-label">Επιστημονική Έννοια</div>
+      <div class="content-text">${m.science_concept||''}</div>
+
+      ${m.diaspora_connection?`
+      <div class="med-callout">
+        <div class="med-callout-header">🇯🇵 Μεσογειακή Σύνδεση</div>
+        <div class="med-callout-text">${m.diaspora_connection}</div>
+      </div>`:''}
+
+      ${vocabWords.length?`
+      <div class="section-divider"></div>
+      <div class="content-label">📘 Λεξιλόγιο Ενότητας</div>
+      <div class="vocab-grid">${vocabWords.map(v=>`<div class="vocab-card"><div class="vocab-word">${v.word}</div><div class="vocab-def">${v.def}</div></div>`).join('')}</div>`:''}
+
+      ${acts.length?`
+      <div class="section-divider"></div>
+      <div class="content-label">🧪 Δραστηριότητες</div>
+      <div class="activity-list">${acts.map(a=>`<div class="activity-item"><div class="activity-icon">${ACTIVITY_ICONS[a.activity_type]||'📌'}</div><div class="activity-body"><div class="activity-type">${ACTIVITY_LABELS[a.activity_type]||a.activity_type}</div><div class="activity-title">${a.title}</div>${a.instructions?'<div class="activity-text">'+a.instructions+'</div>':''}</div></div>`).join('')}</div>`:''}
+
+      ${proms.length?`
+      <div class="section-divider"></div>
+      <div class="content-label">📓 Ερεθίσματα Ημερολογίου</div>
+      <div class="prompt-list">${proms.map(p=>`<div class="prompt-item"><div class="prompt-type">${PROMPT_LABELS[p.prompt_type]||p.prompt_type}</div><div class="prompt-text">${p.prompt}</div></div>`).join('')}</div>`:''}
+
+      ${threadId?`
+      <div class="section-divider"></div>
+      <a style="display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:#fff;padding:9px 16px;border-radius:8px;font-size:.83rem;font-weight:600;text-decoration:none" href="discussion-thread.html?id=${threadId}">💬 Ανοιξτή συζήτηση για αυτή την ενότητα</a>`:''}
+
+      <div style="margin-top:2rem">
+        <button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Αρχή σελίδας</button>
+      </div>
+    </section>`
+  }).join('')
+
+  document.getElementById('loading').style.display='none'
+
+  // Sidebar active state on scroll
+  const sections=document.querySelectorAll('.module-section')
+  const sbAll=document.querySelectorAll('.sb-link[href^="#"]')
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        sbAll.forEach(l=>l.classList.remove('active'))
+        const link=document.querySelector('.sb-link[href="#'+e.target.id+'"]')
+        if(link)link.classList.add('active')
+      }
+    })
+  },{threshold:.3})
+  sections.forEach(s=>obs.observe(s))
+
+  // Hash navigation
+  const hash=window.location.hash
+  if(hash){
+    setTimeout(()=>{
+      const el=document.querySelector(hash)
+      if(el)el.scrollIntoView({behavior:'smooth'})
+    },300)
+  }
+}
+
+function buildVocab(m){
+  // Hardcoded vocab per module since DB doesn't have a vocab table yet
+  const vocab={
+    1:[{word:'Έδαφος',def:'Η επιφάνεια της Γης όπου ζουν φυτά και ζώα'},{word:'Οργανική Όλη',def:'Υλικά από ζωντανά όντα στο χώμα'},{word:'Μικροοργανισμός',def:'Σωματίδιο που δεν φαίνεται με γυμνό μάτι'},{word:'Γονιμότητα',def:'Η ικανότητα του εδάφους να υποστηρίζει φυτά'},{word:'Ορυκτά',def:'Ανόργανα στοιχεία του εδάφους'}],
+    2:[{word:'Διασπορά',def:'Η διασπορά σπόρων μακριά από το μητρικό φυτό'},{word:'Επικονίαση',def:'Μεταφορά γύρης από το άνθος στο φυτό'},{word:'Προσαρμογή',def:'Ο τρόπος που αλλάζει ένα φυτό για να επιβιώσει'},{word:'Νευροφυτό',def:'Νέο φυτό που αναπτύσσεται από σπόρο'}],
+    3:[{word:'Κύκλος Νερού',def:'Συνεχής κίνηση νερού στην Ατμόσφαιρα, στη Γη και κτλ.'},{word:'Εξάτμιση',def:'Νερό που εξατμίζεται από το έδαφος'},{word:'Κατακρημνίσεις',def:'Νερό που πέφτει από τα σύννεφα'},{word:'Άρδευση',def:'Παροχή νερού σε καλλιέργειες'}],
+    4:[{word:'Φωτοσύνθεση',def:'Τρόπος παραγωγής τροφής από τα φυτά'},{word:'Θρεπτικά Στοιχεία',def:'Ουσίες που τρέφουν τα φυτά'},{word:'Γεωργικές Τεχνικές',def:'Μέθοδοι καλλιέργειας τροφίμων'},{word:'Ανάπτυξη Φυτού',def:'Στάδια ανάπτυξης από σπόρο έως φυτό'}],
+    5:[{word:'Οικοσύστημα',def:'Σύνολο ζωντανών και περιβάλλοντος τους'},{word:'Βιοποικιλότητα',def:'Πλήθος ειδών ζωντανών σε μια περιοχή'},{word:'Τροφική Αλυσίδα',def:'Αλληλουχία μεταξύ ζωντανών'},{word:'Βιότοπος',def:'Περιβάλλον όπου ζουν οργανισμοί'}],
+    6:[{word:'Βιωσιμότητα',def:'Χρήση πόρων χωρίς να εξαντλώνται'},{word:'Κυκλική Οικονομία',def:'Σύστημα όπου τίποτα δεν πατάει αχρησιμοποίητο'},{word:'Κλιματική Αλλαγή',def:'Αλλαγές στα κλιματικά πρότυπα λόγω ανθρώπινης δράσης'},{word:'Ανακύκλωση',def:'Επεξεργασία υλικών για νέα χρήση'}]
+  }
+  return vocab[m.month_number]||[]
+}
+
+init()
+</script>
+</body>
+</html>
